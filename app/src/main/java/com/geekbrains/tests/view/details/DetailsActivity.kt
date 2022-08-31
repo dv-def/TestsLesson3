@@ -20,9 +20,18 @@ class DetailsActivity : AppCompatActivity(), ViewDetailsContract {
         setUI()
     }
 
+    override fun onResume() {
+        super.onResume()
+        presenter.onAttach(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        presenter.onDetach()
+    }
+
     private fun setUI() {
         val count = intent.getIntExtra(TOTAL_COUNT_EXTRA, 0)
-        presenter.onAttach(this)
         presenter.setCounter(count)
         setCountText(count)
         decrementButton.setOnClickListener { presenter.onDecrement() }

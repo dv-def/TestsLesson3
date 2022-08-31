@@ -26,8 +26,17 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        presenter.onAttach(this)
         setUI()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        presenter.onAttach(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        presenter.onDetach()
     }
 
     private fun setUI() {
